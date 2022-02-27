@@ -8,8 +8,7 @@ class SourceCode:
 
     def extract_content(self):
         with open(self.path, 'r') as file:
-            for line in file:
-                self.content.append(line)
+            self.content = [line for line in file]
         return self.content
 
     def count_code_lines(self):
