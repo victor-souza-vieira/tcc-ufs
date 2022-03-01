@@ -1,7 +1,8 @@
 class SourceCode:
-    def __init__(self, path):
+    def __init__(self, path, cyclomatic_complexity):
         self.path = path
         self.content = []
+        self.cyclomatic_complexity = cyclomatic_complexity
 
     def print_content(self):
         print(self.content)
