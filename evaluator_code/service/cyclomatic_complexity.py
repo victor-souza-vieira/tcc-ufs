@@ -1,6 +1,5 @@
 import subprocess as sp
 import json
-from evaluator_code.model.source_code import SourceCode
 
 
 class CyclomaticComplexity:
@@ -8,8 +7,14 @@ class CyclomaticComplexity:
         Main responsibility is to calculate cyclomatic complexity using
         **radon** library.
     """
-    def __init__(self, path):
+
+    def __init__(self, path, sources_code):
+        """
+        :param path: base path to files
+        :param sources_code: list of SourceCode class
+        """
         self.path = path
+        self.sources_code = sources_code
 
     def calculate_complexity(self):
         """
@@ -20,14 +25,13 @@ class CyclomaticComplexity:
         # Process all codes from directory and return json string with result
         process_data_string = sp.getoutput('python3 -m radon cc ' + self.path + ' -j')
 
-        sources_code = self.__extract_data(process_data_string)
+        self.__extract_data(process_data_string)
 
-        sources_code = self.__clean_data(sources_code)
+        self.__clean_data()
 
-        return sources_code
+        return self.sources_code
 
-    @staticmethod
-    def __extract_data(data):
+    def __extract_data(self, data):
         """
         :param data: string containing result process of sources code
         :return: list of SourceCode class
@@ -36,26 +40,21 @@ class CyclomaticComplexity:
         # convert data content to json
         data = json.loads(data[0:-4])
 
-        # list of source code
-        sources_code = []
-
         # for each key in data dict
         for key in data.keys():
-            # filling SourceCode object
-            source_code = SourceCode(key, data[key])
+            # for source code in source_codes list
+            for source_code in self.sources_code:
+                if key == source_code.path:
+                    source_code.cyclomatic_complexity = data[key]
 
-            # add SourceCode object into sources_code list
-            sources_code.append(source_code)
+        return self.sources_code
 
-        return sources_code
-
-    @staticmethod
-    def __clean_data(sources_code):
-        for source_code in sources_code:
+    def __clean_data(self):
+        for source_code in self.sources_code:
             for component in source_code.cyclomatic_complexity:
                 del component['endline']
                 del component['lineno']
                 del component['col_offset']
                 del component['closures']
 
-        return sources_code
+        return self.sources_code
