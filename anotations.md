@@ -27,7 +27,7 @@
 
 ####Cálculo de rank:
 
-####rank=⌈score10⌉−H(5−score)
+####rank=⌈score/10⌉−H(5−score)
 
 Onde H(s) é a função step de Heaviside
 

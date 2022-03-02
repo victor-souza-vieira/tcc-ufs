@@ -22,7 +22,9 @@ class CyclomaticComplexity:
 
         sources_code = self.__extract_data(process_data_string)
 
-        return 'result'
+        sources_code = self.__clean_data(sources_code)
+
+        return sources_code
 
     def __extract_data(self, data):
         """
@@ -43,5 +45,15 @@ class CyclomaticComplexity:
 
             # add SourceCode object into sources_code list
             sources_code.append(source_code)
+
+        return sources_code
+
+    def __clean_data(self, sources_code):
+        for source_code in sources_code:
+            for component in source_code.cyclomatic_complexity:
+                del component['endline']
+                del component['lineno']
+                del component['col_offset']
+                del component['closures']
 
         return sources_code
