@@ -52,6 +52,8 @@ def main2():
 
 
 def main():
+    # coment 1
+    # coment 2
     n = int(input())
     for _ in range(n):
         entrada = list(input())
@@ -59,6 +61,7 @@ def main():
 
 
 def mainx():
+    # coment 3
     n = int(input())
     for _ in range(n):
         entrada = list(input())
@@ -66,8 +69,26 @@ def mainx():
 
 
 def sample():
+    '''
+    multiple line coments
+    alba asadasda
+    adasdas
+    asdasdas
+    '''
     b = sp.getoutput('python3 -m radon raw example.py -j')
     print(b.lstrip())
+
+    '''
+    asdasd
+    asda
+    asd
+    asd
+    as
+    das
+    da
+    sdas
+    dasdas
+    '''
 
 
 if __name__ == '__main__':
