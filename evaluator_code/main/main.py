@@ -9,9 +9,10 @@ sc2 = SourceCode(path + 'example2.py')  # source code
 
 scs = [sc1, sc2]  # sources code
 
+# -------------- CYCLOMATIC COMPLEXITY --------------
 cc = CyclomaticComplexity(path, scs)
-print(cc.calculate_complexity())
+cc.calculate_complexity()
 
-# ----------------
-rm = RawMetrics(path)
+# ---------------- RAW METRICS ---------------------
+rm = RawMetrics(path, scs)
 rm.calculate_raw_metrics()

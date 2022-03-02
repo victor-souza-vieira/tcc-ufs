@@ -3,8 +3,9 @@ import subprocess as sp
 
 
 class RawMetrics:
-    def __init__(self, path):
+    def __init__(self, path, sources_code):
         self.path = path
+        self.sources_code = sources_code
 
     def calculate_raw_metrics(self):
         """
@@ -22,5 +23,23 @@ class RawMetrics:
         """
         process_data_string = sp.getoutput('python3 -m radon raw ' + self.path + ' -j')
 
-        process_data_json = json.loads(process_data_string[0:-4])
-        return 'a'
+        self.__extract_data(process_data_string)
+
+        return self.sources_code
+
+    def __extract_data(self, data):
+        """
+        :param data: string containing data for process
+        :return: list of SourceCode class
+        """
+        data = json.loads(data[0:-4])
+
+        # for key in json data
+        for key in data.keys():
+            # for source code in sources_code list
+            for source_code in self.sources_code:
+                if key == source_code.path:
+                    source_code.raw_metrics = data[key]
+
+        return self.sources_code
+

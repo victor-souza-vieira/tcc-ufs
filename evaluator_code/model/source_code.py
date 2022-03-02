@@ -3,6 +3,7 @@ class SourceCode:
         self.path = path
         self.content = []
         self.cyclomatic_complexity = []
+        self.raw_metrics = []
 
     def print_content(self):
         print(self.content)
