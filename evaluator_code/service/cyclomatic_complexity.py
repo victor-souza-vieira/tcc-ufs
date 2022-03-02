@@ -26,7 +26,8 @@ class CyclomaticComplexity:
 
         return sources_code
 
-    def __extract_data(self, data):
+    @staticmethod
+    def __extract_data(data):
         """
         :param data: string containing result process of sources code
         :return: list of SourceCode class
@@ -48,7 +49,8 @@ class CyclomaticComplexity:
 
         return sources_code
 
-    def __clean_data(self, sources_code):
+    @staticmethod
+    def __clean_data(sources_code):
         for source_code in sources_code:
             for component in source_code.cyclomatic_complexity:
                 del component['endline']
