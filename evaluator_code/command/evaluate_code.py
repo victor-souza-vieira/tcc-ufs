@@ -26,7 +26,7 @@ def main_flow():
     # ---------------- PRINT RESULTS -------------------
     for code in source_codes:
         code.print_attr()
-        print('------------------------------------------')
+        print('------------------------------------------\n')
 
 
 def calculate_raw_metrics(path, source_codes):
