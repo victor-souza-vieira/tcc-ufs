@@ -1,15 +1,14 @@
-def EstacaoAno(hemisferio,dia,mes):
-
+def EstacaoAno(hemisferio, dia, mes):
     if hemisferio == 0:
-        if mes in (1,2):
+        if mes in (1, 2):
             return 'INVERNO'
         elif mes == 3:
             if dia < 21:
                 return 'INVERNO'
             else:
                 return 'PRIMAVERA'
-            
-        elif mes in (4,5):
+
+        elif mes in (4, 5):
             return 'PRIMAVERA'
         elif mes == 6:
             return 'PRIMAVERA'
@@ -17,23 +16,23 @@ def EstacaoAno(hemisferio,dia,mes):
                 return 'PRIMAVERA'
             else:
                 return 'VERAO'
-                
-        elif mes in (7,8):
+
+        elif mes in (7, 8):
             return 'VERAO'
         elif mes == 9:
             if dia < 21:
                 return 'VERAO'
             else:
                 return 'OUTONO'
-                
-        elif mes in (10,11):
+
+        elif mes in (10, 11):
             return 'OUTONO'
         elif mes == 12:
             if dia < 21:
                 return 'OUTONO'
             else:
                 return 'INVERNO'
-      
+
     if hemisferio == 1:
         if mes in (1, 2):
             return 'VERAO'
@@ -42,7 +41,7 @@ def EstacaoAno(hemisferio,dia,mes):
                 return 'VERAO'
             else:
                 return 'OUTONO'
-        elif mes in (4,5):
+        elif mes in (4, 5):
             return 'OUTONO'
         elif mes == 6:
             if dia < 21:
@@ -52,7 +51,7 @@ def EstacaoAno(hemisferio,dia,mes):
         elif mes in (7, 8):
             return 'INVERNO'
         elif mes == 9:
-            if dia < 21 :
+            if dia < 21:
                 return 'INVERNO'
             else:
                 return 'PRIMAVERA'
@@ -63,11 +62,12 @@ def EstacaoAno(hemisferio,dia,mes):
                 return 'PRIMAVERA'
             else:
                 return 'VERAO'
- 
-hemisferio = int(input())      
+
+
+hemisferio = int(input())
 dia = int(input())
 mes = int(input())
 
-resultado = EstacaoAno(hemisferio,dia,mes)
+resultado = EstacaoAno(hemisferio, dia, mes)
 
 print(resultado)
