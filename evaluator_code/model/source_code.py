@@ -15,3 +15,11 @@ class SourceCode:
 
     def count_code_lines(self):
         return len(self.content)
+
+    def print_attr(self):
+        print(self.path)
+        print(self.cyclomatic_complexity)
+        print(self.raw_metrics)
+
+    def extract_file_name(self):
+        return self.path.split('/')[-1].replace('.py', '')
