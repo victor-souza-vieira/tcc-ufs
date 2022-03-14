@@ -4,8 +4,8 @@ from evaluator_code.model.source_code import SourceCode
 
 path = '/home/victor/TCC/source-code/docs/submissions/'
 
-sc1 = SourceCode(path + 'example.py')  # source code
-sc2 = SourceCode(path + 'example2.py')  # source code
+sc1 = SourceCode(path + 'student1-odd_numbers.py')  # source code
+sc2 = SourceCode(path + 'student2-odd_numbers.py')  # source code
 
 scs = [sc1, sc2]  # sources code
 
