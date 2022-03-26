@@ -38,11 +38,13 @@ def compare_submissions(source_codes):
     for key in source_codes_for_problem.keys():
         source_codes = source_codes_for_problem[key]
         base_code = None
+
         for i in range(len(source_codes)):
             if source_codes[i].is_base_source_code():
                 base_code = source_codes.pop(i)
                 break
-        compare = CompareSubmissions(base_code, source_codes, None)
+
+        compare = CompareSubmissions(base_code, source_codes, None).compare_cyclomatic_complexity()
 
 
 def extract_source_codes_for_problem(source_codes):
