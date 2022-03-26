@@ -1,6 +1,7 @@
 {
   "root_path": "/home/victor/TCC/source-code/docs",
   "calculate_cyclomatic_complexity": "on",
+  "diff_cyclomatic_complexity": 5,
   "calculate_raw_metrics": "on",
   "diff_percent_to_alert": 50
 }
