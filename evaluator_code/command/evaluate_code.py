@@ -5,6 +5,7 @@ from evaluator_code.service.cyclomatic_complexity import CyclomaticComplexity
 from evaluator_code.service.raw_metrics import RawMetrics
 from evaluator_code.model.source_code import SourceCode
 from evaluator_code.service.compare_submissions import CompareSubmissions
+from evaluator_code.service.file_builder import FileBuilder
 
 ON = "on"
 
@@ -25,7 +26,11 @@ def main_flow():
         calculate_raw_metrics(path, source_codes)
 
     # ------------- COMPARE SUBMISSIONS -------------
-    compare_submissions(source_codes)
+    problems = compare_submissions(source_codes, configs)
+
+    # -------------- FILE BUILDER ------------------
+    file_builder = FileBuilder(problems, source_codes).build()
+
 
     # ---------------- PRINT RESULTS -------------------
     # for code in source_codes:
@@ -33,7 +38,7 @@ def main_flow():
     #     print('------------------------------------------\n')
 
 
-def compare_submissions(source_codes):
+def compare_submissions(source_codes, configs):
     source_codes_for_problem = extract_source_codes_for_problem(source_codes)
     for key in source_codes_for_problem.keys():
         source_codes = source_codes_for_problem[key]
@@ -44,7 +49,8 @@ def compare_submissions(source_codes):
                 base_code = source_codes.pop(i)
                 break
 
-        compare = CompareSubmissions(base_code, source_codes, None).compare_cyclomatic_complexity()
+        CompareSubmissions(base_code, source_codes, configs).compare_cyclomatic_complexity()
+    return source_codes_for_problem.keys()
 
 
 def extract_source_codes_for_problem(source_codes):

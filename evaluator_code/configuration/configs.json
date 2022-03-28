@@ -3,5 +3,6 @@
   "calculate_cyclomatic_complexity": "on",
   "diff_cyclomatic_complexity": 5,
   "calculate_raw_metrics": "on",
-  "diff_percent_to_alert": 50
+  "diff_percent_to_alert": 50,
+  "result_output": "/home/victor/TCC/source-code/docs/result.txt"
 }
