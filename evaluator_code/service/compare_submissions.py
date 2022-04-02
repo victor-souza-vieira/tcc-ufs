@@ -13,7 +13,7 @@ class CompareSubmissions:
 
             diff = submission_total_complexity - base_complexity
             alert = self.alert_config['diff_cyclomatic_complexity']
-            file_name = submission.extract_file_name()
+            # file_name = submission.extract_file_name()
 
             if 0 < diff > alert:
                 # Aqui a submissao do aluno teve complexidade maior que a do professor baseado na configuração de alerta
@@ -44,6 +44,7 @@ class CompareSubmissions:
         diff_lloc = code.raw_metrics['lloc'] - self.base.raw_metrics['lloc']
         alert_lloc = self.alert_config['diff_raw_metrics_lloc']
         logical_lines_of_code = code.raw_metrics['lloc']
+
         if 0 < diff_lloc > alert_lloc:
             # Solucao do aluno teve mais linhas de código que a do professor e ultrapassou o limite de alerta
             code.raw_metrics_result += '\n\t\t\tLinhas lógicas de código: {0}; Diferença com a submissão base: {1}; Ultrapassou o limite de alerta de {2}'.format(logical_lines_of_code, diff_lloc, alert_lloc)
@@ -66,6 +67,7 @@ class CompareSubmissions:
         diff_loc = code.raw_metrics['loc'] - self.base.raw_metrics['loc']
         alert_loc = self.alert_config['diff_raw_metrics_loc']
         lines_of_code = code.raw_metrics['loc']
+
         if 0 < diff_loc > alert_loc:
             # Solucao do aluno teve mais linhas de código que a do professor e ultrapassou o limite de alerta
             code.raw_metrics_result = 'Linhas de código: {0}; Diferença com a submissão base: {1}; Ultrapassou o limite de alerta de {2}'.format(lines_of_code, diff_loc, alert_loc)
