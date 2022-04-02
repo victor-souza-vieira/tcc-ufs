@@ -21,12 +21,12 @@ class FileBuilder:
                         if code.is_base_source_code():
                             header_problem += 'Resultado para a solução base:' + new_line + two_tabs
                             header_problem += code.cyclomatic_complexity_result + new_line + two_tabs
-                            header_problem += 'Raw metrics aqui...' + new_line + tab
+                            header_problem += code.raw_metrics_result + new_line + tab
                             header_problem += 'Resultado para as submissões dos alunos:' + new_line + two_tabs
                             continue
                         body_problem += 'Submissão: ' + code.extract_file_name() + new_line + three_tabs
                         body_problem += 'Complexidade ciclomática: ' + code.cyclomatic_complexity_result + new_line + three_tabs
-                        body_problem += 'Raw metrics para alunos aqui...' + new_line + two_tabs
+                        body_problem += code.raw_metrics_result + new_line + two_tabs
                 output.write(header_problem)
                 output.write(body_problem)
                 output.write(new_line)

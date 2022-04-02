@@ -5,6 +5,7 @@ class SourceCode:
         self.cyclomatic_complexity = []
         self.raw_metrics = []
         self.cyclomatic_complexity_result = ''
+        self.raw_metrics_result = ''
 
     def print_content(self):
         print(self.content)

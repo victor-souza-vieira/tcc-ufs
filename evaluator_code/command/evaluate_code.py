@@ -48,7 +48,9 @@ def compare_submissions(source_codes, configs):
                 base_code = source_codes.pop(i)
                 break
 
-        CompareSubmissions(base_code, source_codes, configs).compare_cyclomatic_complexity()
+        comparator = CompareSubmissions(base_code, source_codes, configs)
+        comparator.compare_cyclomatic_complexity()
+        comparator.compare_raw_metrics()
     return source_codes_for_problem.keys()
 
 
