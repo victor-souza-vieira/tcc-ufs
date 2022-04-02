@@ -30,4 +30,4 @@ class SourceCode:
         return self.path.split('/')[-3]
 
     def is_base_source_code(self):
-        return self.path.split('/')[-2] == 'base'
+        return self.path.split('/')[-2] == 'professor'
