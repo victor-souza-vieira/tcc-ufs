@@ -127,6 +127,7 @@ def modularize_and_calculate_cyclomatic_complexity_for_all_codes(source_codes):
         os.remove(file_path)
 
 
+# Unused function
 def calculates_the_cyclomatic_complexity_if_the_code_is_not_modularized(source_codes):
     for code in source_codes:
         if len(code.cyclomatic_complexity) == 0:
