@@ -1,4 +1,4 @@
 *pycache*
 *.idea*
 */result.txt*
-*docs/*.py
+docs/*/*/*.py
