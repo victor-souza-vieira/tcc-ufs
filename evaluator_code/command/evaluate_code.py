@@ -1,5 +1,6 @@
 import json
 import os
+import subprocess
 
 from evaluator_code.service.cyclomatic_complexity import CyclomaticComplexity
 from evaluator_code.service.raw_metrics import RawMetrics
@@ -88,6 +89,10 @@ def calculates_the_cyclomatic_complexity_if_the_code_is_not_modularized(path, so
             new_file.close()
 
             sc = SourceCode(file_path)
+
+            # format the file
+            subprocess.getoutput('python3 -m black ' + sc.path)
+
             ccc = CyclomaticComplexity(file_path, [sc])
             ccc.calculate_complexity()
             code.cyclomatic_complexity = sc.cyclomatic_complexity
@@ -100,7 +105,7 @@ def create_source_codes_from_path(path):
 
     for directory, subdirectories, files in os.walk(path):
         for file in files:
-            if ('/submissions' in directory or '/base' in directory) and ('.py' in file):
+            if ('/alunos' in directory or '/professor' in directory) and ('.py' in file):
                 source_code = SourceCode(os.path.join(directory, file))
                 source_codes.append(source_code)
 
