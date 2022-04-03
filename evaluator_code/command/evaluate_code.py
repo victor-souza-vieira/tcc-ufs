@@ -30,7 +30,7 @@ def main_flow():
     problems = compare_submissions(source_codes, configs)
 
     # -------------- FILE BUILDER ------------------
-    file_builder = FileBuilder(problems, source_codes, configs['result_output']).build()
+    FileBuilder(problems, source_codes, configs['result_output_txt']).build()
 
     # ---------------- PRINT RESULTS -------------------
     # for code in source_codes:
