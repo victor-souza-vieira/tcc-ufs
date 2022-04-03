@@ -4,8 +4,8 @@ class SourceCode:
         self.content = []
         self.cyclomatic_complexity = []
         self.raw_metrics = []
-        self.cyclomatic_complexity_result = ''
-        self.raw_metrics_result = ''
+        self.cyclomatic_complexity_result_txt = ''
+        self.raw_metrics_result_txt = ''
 
     def print_content(self):
         print(self.content)
