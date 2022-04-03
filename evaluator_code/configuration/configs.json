@@ -8,7 +8,9 @@
   "diff_raw_metrics_sloc": 10,
   "result_output_txt": "/home/victor/TCC/source-code/docs/result.txt",
   "result_output_csv": "/home/victor/TCC/source-code/docs/result.csv",
-  "initial_points": 100,
-  "decrease_factor_of_points": 3,
-  "increase_factor_of_points": 2
+  "initial_score": 100,
+  "decrease_factor": 3,
+  "increase_factor": 2,
+  "rate_decrease_to_raw_metrics": 15,
+  "rate_increase_to_raw_metrics": 10
 }

@@ -16,7 +16,7 @@ def main_flow():
 
     path = configs['root_path']
 
-    source_codes = create_source_codes_from_path(path)
+    source_codes = create_source_codes_from_path(path, configs['initial_score'])
 
     # ------------ CYCLOMATIC COMPLEXITY -------------
     if configs['calculate_cyclomatic_complexity'] == ON:
@@ -153,13 +153,14 @@ def calculates_the_cyclomatic_complexity_if_the_code_is_not_modularized(source_c
             os.remove(file_path)
 
 
-def create_source_codes_from_path(path):
+def create_source_codes_from_path(path, score):
     source_codes = []
 
     for directory, subdirectories, files in os.walk(path):
         for file in files:
             if ('/alunos' in directory or '/professor' in directory) and ('.py' in file):
                 source_code = SourceCode(os.path.join(directory, file))
+                source_code.score = score
                 source_codes.append(source_code)
 
     return source_codes
