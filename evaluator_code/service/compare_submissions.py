@@ -7,6 +7,7 @@ class CompareSubmissions:
     def compare_cyclomatic_complexity(self):
         base_complexity = self.__compute_total_points_of_cyclomatic_complexity(self.base.cyclomatic_complexity)
         self.base.cyclomatic_complexity_result_txt = 'Complexidade ciclomática: {0} pontos.'.format(base_complexity)
+        self.base.cyclomatic_complexity_result_csv = self.base.extract_problem_name() + ';' + self.base.extract_file_name() + ';YES;' + str(base_complexity) + ';-;'
 
         for submission in self.submissions:
             submission_total_complexity = self.__compute_total_points_of_cyclomatic_complexity(submission.cyclomatic_complexity)
@@ -38,6 +39,8 @@ class CompareSubmissions:
         self.base.raw_metrics_result_txt = 'Linhas de código: {0}'.format(self.base.raw_metrics['loc'])
         self.base.raw_metrics_result_txt += '\n\t\tLinhas lógicas de código: {0}'.format(self.base.raw_metrics['lloc'])
         self.base.raw_metrics_result_txt += '\n\t\tLinhas de código fonte: {0}'.format(self.base.raw_metrics['sloc'])
+
+        self.base.raw_metrics_result_csv += str(self.base.raw_metrics['loc']) + ';-;' + str(self.base.raw_metrics['lloc']) + ';-;' + str(self.base.raw_metrics['sloc']) + ';-;-;'
         for code in self.submissions:
             self.__lines_of_code_metric(code)
             self.__logical_lines_of_code_metric(code)

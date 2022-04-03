@@ -6,13 +6,17 @@ four_tabs = '\t\t\t\t'
 
 
 class FileBuilder:
-    def __init__(self, problems, source_codes, output='/home/victor/TCC/source-code/docs/result.txt'):
+    def __init__(self, problems, source_codes, config):
         self.problems = problems
         self.source_codes = source_codes
-        self.output = output
+        self.config = config
 
     def build(self):
-        with open(self.output, 'w', encoding='UTF-8') as output:
+        self.build_txt()
+        self.build_csv()
+
+    def build_txt(self):
+        with open(self.config['result_output_txt'], 'w', encoding='UTF-8') as output:
             for problem in self.problems:
                 header_problem = '--------------- Resultados para o problema: `{0}`. --------------- {1}{2}'.format(problem, new_line, tab)
                 body_problem = ''
@@ -30,3 +34,15 @@ class FileBuilder:
                 output.write(header_problem)
                 output.write(body_problem)
                 output.write(new_line)
+
+    def build_csv(self):
+        header = 'PROBLEM;SOLUTION;IS_TEACHER;CYCLOMATIC_COMPLEXITY;EXCEEDED LIMIT CC;LINES OF CODE;'\
+                 'EXCEEDED LIMIT LOC;LOGICAL LINES OF CODE;EXCEEDED LIMIT LLOC;LINES OF CODE; LIMIT SLOC;'\
+                 'FINAL SCORE;\n'
+        with open(self.config['result_output_csv'], 'w', encoding='UTF-8') as output:
+            output.write(header)
+            for problem in self.problems:
+                for code in self.source_codes:
+                    if code.extract_problem_name() == problem:
+                        if code.cyclomatic_complexity_result_csv != '':
+                            output.write(code.cyclomatic_complexity_result_csv + code.raw_metrics_result_csv + '\n')
