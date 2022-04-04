@@ -1,3 +1,8 @@
+## ISO 25010
+### ISO/IEC 25010
+1. Estudar as normas de qualidade
+2. https://iso25000.com/index.php/en/iso-25000-standards/iso-25010
+
 ## Radon
 ### Raw metrics
 1. Número total de linhas de código
