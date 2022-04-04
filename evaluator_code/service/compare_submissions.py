@@ -20,26 +20,26 @@ class CompareSubmissions:
                 # Aqui a submissao do aluno teve complexidade maior que a do professor baseado na configuração de alerta
                 submission.cyclomatic_complexity_result_txt = '{0} pontos com diferença de {1} pontos com a solução base ultrapassando o limite de alerta de {2} pontos'.format(submission_total_complexity, diff, alert)
                 submission.cyclomatic_complexity_result_csv += 'YES;'
-                self.__calculate_score(submission, True, diff)
+                self.__calculate_score(submission, diff)
                 continue
             if 0 > diff < -alert:
                 print(submission.path)
                 # Aqui a submissao do professor teve uma complexidade ciclomatica geral maior do que a do aluno passando do nivel de alerta
                 submission.cyclomatic_complexity_result_txt = '{0} pontos com diferença de {1} pontos com a solução base ultrapassando o limite de alerta de  -{2} pontos.'.format(submission_total_complexity, diff, alert)
                 submission.cyclomatic_complexity_result_csv += 'YES;'
-                self.__calculate_score(submission, True, diff)
+                self.__calculate_score(submission, diff)
                 continue
             if 0 < diff < alert:
                 # Aqui a submissao do aluno teve maior complexidade que a do professor, porém não passou do nivel de alerta
                 submission.cyclomatic_complexity_result_txt = '{0} pontos contra {1} da solução base.'.format(submission_total_complexity, base_complexity)
                 submission.cyclomatic_complexity_result_csv += 'NO;'
-                self.__calculate_score(submission, False, diff)
+                self.__calculate_score(submission, diff)
                 continue
             if 0 > diff > -alert:
                 # Aqui a submissao do aluno teve menor complexidade que a do professor, porém não passou do nivel de alerta
                 submission.cyclomatic_complexity_result_txt = '{0} pontos contra {1} da solução base'.format(submission_total_complexity, base_complexity)
                 submission.cyclomatic_complexity_result_csv += 'NO;'
-                self.__calculate_score(submission, False, diff)
+                self.__calculate_score(submission, diff)
                 continue
 
             submission.cyclomatic_complexity_result_txt = '{0} pontos, igual a solução base'.format(submission_total_complexity)
@@ -55,8 +55,6 @@ class CompareSubmissions:
             self.__lines_of_code_metric(code)
             self.__logical_lines_of_code_metric(code)
             self.__lines_of_source_code_metric(code)
-            if code.score > 100: code.score = 100
-            if code.score < 0:  code.score = 0
             code.raw_metrics_result_csv += str(round(code.score, 2)) + ';'
 
     def __lines_of_source_code_metric(self, code):
@@ -70,28 +68,28 @@ class CompareSubmissions:
             code.raw_metrics_result_txt += '\n\t\t\tLinhas de código fonte: {0}; Diferença com a submissão base: {1}; Ultrapassou o limite de alerta de {2}'.format(
                 source_lines_of_code, diff_sloc, alert_sloc)
             code.raw_metrics_result_csv += 'YES;'
-            self.__calculate_score(code, True, diff_sloc, True)
+            self.__calculate_score(code, diff_sloc, True)
             return
         if 0 < diff_sloc < alert_sloc:
             # Solucao do aluno teve mais linhas de código que a do professor, porém não ultrapassou o limite de alerta
             code.raw_metrics_result_txt += '\n\t\t\tLinhas de código fonte: {0}; Diferença com a submissão base: {1};'.format(
                 source_lines_of_code, diff_sloc)
             code.raw_metrics_result_csv += 'NO;'
-            self.__calculate_score(code, False, diff_sloc, True)
+            self.__calculate_score(code, diff_sloc, True)
             return
         if 0 > diff_sloc < -alert_sloc:
             # Solucao do aluno teve menos linhas de código que a do professor e ultrapassou o limite de alerta
             code.raw_metrics_result_txt += '\n\t\t\tLinhas de código fonte: {0}; Menos linhas que a submissão base, porém ultrapassou o limite de alerta de {1}'.format(
                 source_lines_of_code, alert_sloc)
             code.raw_metrics_result_csv += 'YES;'
-            self.__calculate_score(code, True, diff_sloc, True)
+            self.__calculate_score(code, diff_sloc, True)
             return
         if 0 > diff_sloc > -alert_sloc:
             # Solucao do aluno teve menos linhas de código que a do professor e não ultrapassou o limite de alerta
             code.raw_metrics_result_txt += '\n\t\t\tLinhas de código fonte: {0}; Menos linhas que a submissão base e não ultrapassou o limite de alerta'.format(
                 source_lines_of_code)
             code.raw_metrics_result_csv += 'NO;'
-            self.__calculate_score(code, False, diff_sloc, True)
+            self.__calculate_score(code, diff_sloc, True)
             return
         code.raw_metrics_result_txt += '\n\t\t\tLinhas de código fonte: {0}; Quantidade igual de linhas com a submissão base'.format(
             source_lines_of_code)
@@ -107,25 +105,25 @@ class CompareSubmissions:
             # Solucao do aluno teve mais linhas de código que a do professor e ultrapassou o limite de alerta
             code.raw_metrics_result_txt += '\n\t\t\tLinhas lógicas de código: {0}; Diferença com a submissão base: {1}; Ultrapassou o limite de alerta de {2}'.format(logical_lines_of_code, diff_lloc, alert_lloc)
             code.raw_metrics_result_csv += 'YES;'
-            self.__calculate_score(code, True, diff_lloc, True)
+            self.__calculate_score(code, diff_lloc, True)
             return
         if 0 < diff_lloc < alert_lloc:
             # Solucao do aluno teve mais linhas de código que a do professor, porém não ultrapassou o limite de alerta
             code.raw_metrics_result_txt += '\n\t\t\tLinhas lógicas de código: {0}; Diferença com a submissão base: {1};'.format(logical_lines_of_code, diff_lloc)
             code.raw_metrics_result_csv += 'NO;'
-            self.__calculate_score(code, False, diff_lloc, True)
+            self.__calculate_score(code, diff_lloc, True)
             return
         if 0 > diff_lloc < -alert_lloc:
             # Solucao do aluno teve menos linhas de código que a do professor e ultrapassou o limite de alerta
             code.raw_metrics_result_txt += '\n\t\t\tLinhas lógicas de código: {0}; Menos linhas que a submissão base, porém ultrapassou o limite de alerta de {1}'.format(logical_lines_of_code, alert_lloc)
             code.raw_metrics_result_csv += 'YES;'
-            self.__calculate_score(code, True, diff_lloc, True)
+            self.__calculate_score(code, diff_lloc, True)
             return
         if 0 > diff_lloc > -alert_lloc:
             # Solucao do aluno teve menos linhas de código que a do professor e não ultrapassou o limite de alerta
             code.raw_metrics_result_txt += '\n\t\t\tLinhas lógicas de código: {0}; Menos linhas que a submissão base e não ultrapassou o limite de alerta'.format(logical_lines_of_code)
             code.raw_metrics_result_csv += 'NO;'
-            self.__calculate_score(code, False, diff_lloc, True)
+            self.__calculate_score(code, diff_lloc, True)
             return
         code.raw_metrics_result_txt += '\n\t\t\tLinhas lógicas de código: {0}; Quantidade igual de linhas com a submissão base'.format(logical_lines_of_code)
         code.raw_metrics_result_csv += 'NO;'
@@ -140,25 +138,25 @@ class CompareSubmissions:
             # Solucao do aluno teve mais linhas de código que a do professor e ultrapassou o limite de alerta
             code.raw_metrics_result_txt = 'Linhas de código: {0}; Diferença com a submissão base: {1}; Ultrapassou o limite de alerta de {2}'.format(lines_of_code, diff_loc, alert_loc)
             code.raw_metrics_result_csv += 'YES;'
-            self.__calculate_score(code, True, diff_loc, True)
+            self.__calculate_score(code, diff_loc, True)
             return
         if 0 < diff_loc < alert_loc:
             # Solucao do aluno teve mais linhas de código que a do professor, porém não ultrapassou o limite de alerta
             code.raw_metrics_result_txt = 'Linhas de código: {0}; Diferença com a submissão base: {1};'.format(lines_of_code, diff_loc)
             code.raw_metrics_result_csv += 'NO;'
-            self.__calculate_score(code, False, diff_loc, True)
+            self.__calculate_score(code, diff_loc, True)
             return
         if 0 > diff_loc < -alert_loc:
             # Solucao do aluno teve menos linhas de código que a do professor e ultrapassou o limite de alerta
             code.raw_metrics_result_txt = 'Linhas de código: {0}; Menos linhas que a submissão base, porém ultrapassou o limite de alerta de {1}'.format(lines_of_code, alert_loc)
             code.raw_metrics_result_csv += 'YES;'
-            self.__calculate_score(code, True, diff_loc, True)
+            self.__calculate_score(code, diff_loc, True)
             return
         if 0 > diff_loc > -alert_loc:
             # Solucao do aluno teve menos linhas de código que a do professor e não ultrapassou o limite de alerta
             code.raw_metrics_result_txt = 'Linhas de código: {0}; Menos linhas que a submissão base e não ultrapassou o limite de alerta'.format(lines_of_code)
             code.raw_metrics_result_csv += 'NO;'
-            self.__calculate_score(code, False, diff_loc, True)
+            self.__calculate_score(code, diff_loc, True)
             return
         code.raw_metrics_result_txt = 'Linhas de código: {0}; Quantidade igual de linhas com a submissão base'.format(lines_of_code)
         code.raw_metrics_result_csv += 'NO;'
@@ -172,7 +170,7 @@ class CompareSubmissions:
 
         return complexity[0]['complexity']
 
-    def __calculate_score(self, submission, is_exceed_alert, diff_in_points, is_raw_metrics=False):
+    def __calculate_score(self, submission, diff_in_points, is_raw_metrics=False):
         increase_factor = self.configs['increase_factor']
         decrease_factor = self.configs['decrease_factor']
 
@@ -180,13 +178,10 @@ class CompareSubmissions:
             increase_factor *= (self.configs['rate_increase_to_raw_metrics'] / 100)
             decrease_factor *= (self.configs['rate_decrease_to_raw_metrics'] / 100)
 
-        if is_exceed_alert:
-            if diff_in_points > 0:
-                submission.score -= diff_in_points * decrease_factor
-            else:
-                submission.score += -diff_in_points * increase_factor
+        if diff_in_points > 0:
+            submission.score -= diff_in_points * decrease_factor
         else:
-            if diff_in_points < 0:
-                submission.score += -diff_in_points * increase_factor
+            submission.score += -diff_in_points * increase_factor
+
 
 

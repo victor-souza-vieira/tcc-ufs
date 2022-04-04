@@ -37,7 +37,7 @@ class FileBuilder:
 
     def build_csv(self):
         header = 'PROBLEM;SOLUTION;IS_TEACHER;CYCLOMATIC_COMPLEXITY;EXCEEDED LIMIT CC;LINES OF CODE;'\
-                 'EXCEEDED LIMIT LOC;LOGICAL LINES OF CODE;EXCEEDED LIMIT LLOC;LINES OF CODE; LIMIT SLOC;'\
+                 'EXCEEDED LIMIT LOC;LOGICAL LINES OF CODE;EXCEEDED LIMIT LLOC;SOURCE LINES OF CODE; LIMIT SLOC;'\
                  'FINAL SCORE;\n'
         with open(self.config['result_output_csv'], 'w', encoding='UTF-8') as output:
             output.write(header)
