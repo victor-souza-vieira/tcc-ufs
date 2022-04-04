@@ -9,6 +9,3 @@
 - [ ] Alunos estão identando códigos com espaço único ou duplo ao invés de utilizar a tecla tab
 - [ ] A "corrida de lesmas" faltou a submissão do professor
 - [ ] A "C mais ou menos" faltou a submissão do professor
-
-# TODO
-    ## BOLAR ALGORITMO PARA CALCULAR A PONTUAÇÃO FINAL
