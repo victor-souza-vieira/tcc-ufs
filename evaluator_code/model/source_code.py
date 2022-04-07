@@ -9,6 +9,8 @@ class SourceCode:
         self.cyclomatic_complexity_result_csv = ''
         self.raw_metrics_result_csv = ''
         self.score = 0
+        self.need_attention = False
+        self.need_attention_type = ''
 
     def print_content(self):
         print(self.content)

@@ -55,7 +55,21 @@ class CompareSubmissions:
             self.__lines_of_code_metric(code)
             self.__logical_lines_of_code_metric(code)
             self.__lines_of_source_code_metric(code)
-            code.raw_metrics_result_csv += str(round(code.score, 2)) + ';'
+            code.score = round(code.score, 2)
+            code.raw_metrics_result_csv += str(code.score) + ';'
+
+    def compare_submissions_which_need_attention(self):
+        score_great = self.configs['score_to_great_solution']
+        score_not_so_good = self.configs['score_to_not_so_good_solution']
+        for submission in self.submissions:
+            if submission.score >= score_great:
+                submission.need_attention = True
+                submission.need_attention_type = 'Score >= ' + str(score_great)
+                continue
+            if submission.score <= score_not_so_good:
+                submission.need_attention = True
+                submission.need_attention_type = 'Score <= ' + str(score_not_so_good)
+
 
     def __lines_of_source_code_metric(self, code):
         diff_sloc = code.raw_metrics['sloc'] - self.base.raw_metrics['sloc']

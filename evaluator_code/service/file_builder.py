@@ -14,6 +14,7 @@ class FileBuilder:
     def build(self):
         self.build_txt()
         self.build_csv()
+        self.build_csv_with_solutions_which_need_attention()
 
     def build_txt(self):
         with open(self.config['result_output_txt'], 'w', encoding='UTF-8') as output:
@@ -46,3 +47,14 @@ class FileBuilder:
                     if code.extract_problem_name() == problem:
                         if code.cyclomatic_complexity_result_csv != '':
                             output.write(code.cyclomatic_complexity_result_csv + code.raw_metrics_result_csv + '\n')
+
+    def build_csv_with_solutions_which_need_attention(self):
+        header = 'PROBLEM;SOLUTION;ATTENTION_TYPE;SCORE;\n'
+        with open(self.config['result_output_alert_csv'], 'w', encoding='UTF-8') as output:
+            output.write(header)
+            for problem in self.problems:
+                for code in self.source_codes:
+                    if code.extract_problem_name() == problem:
+                        if code.need_attention:
+                            line = problem + ';' + code.extract_file_name() + ';' + code.need_attention_type + ';' + str(code.score) + ';\n'
+                            output.write(line)

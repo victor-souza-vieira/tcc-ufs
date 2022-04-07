@@ -52,6 +52,7 @@ def compare_submissions(source_codes, configs):
         comparator = CompareSubmissions(base_code, source_codes, configs)
         comparator.compare_cyclomatic_complexity()
         comparator.compare_raw_metrics()
+        comparator.compare_submissions_which_need_attention()
     return source_codes_for_problem.keys()
 
 
