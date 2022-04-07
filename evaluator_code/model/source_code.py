@@ -4,8 +4,13 @@ class SourceCode:
         self.content = []
         self.cyclomatic_complexity = []
         self.raw_metrics = []
-        self.cyclomatic_complexity_result = ''
-        self.raw_metrics_result = ''
+        self.cyclomatic_complexity_result_txt = ''
+        self.raw_metrics_result_txt = ''
+        self.cyclomatic_complexity_result_csv = ''
+        self.raw_metrics_result_csv = ''
+        self.score = 0
+        self.need_attention = False
+        self.need_attention_type = ''
 
     def print_content(self):
         print(self.content)
@@ -30,4 +35,4 @@ class SourceCode:
         return self.path.split('/')[-3]
 
     def is_base_source_code(self):
-        return self.path.split('/')[-2] == 'base'
+        return self.path.split('/')[-2] == 'professor'
