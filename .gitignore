@@ -1,5 +1,5 @@
 *pycache*
 *.idea*
 */result.txt*
-*/result.csv*
+*/result*.csv*
 docs/*/*/*.py
