@@ -15,7 +15,5 @@
   "rate_decrease_to_raw_metrics": 15,
   "rate_increase_to_raw_metrics": 10,
   "score_to_great_solution": 101,
-  "score_to_good_solution": 90,
-  "score_to_medium_solution": 70,
   "score_to_not_so_good_solution": 50
 }
